@@ -6,11 +6,10 @@ Here's what the TwoStack class does:
 2. For each test case, it creates an instance of the twoStacks class to simulate two stacks.
 3. It then processes the queries for each test case.
 4. The queries can be of two types:
-    # Type 1: Push an element onto one of the two stacks.
-    # Type 2: Pop (remove) an element from one of the two stacks and print it.
+    - Type 1: Push an element onto one of the two stacks.
+    - Type 2: Pop (remove) an element from one of the two stacks and print it.
 5. Based on the user's input, the code calls the appropriate methods of the twoStacks class to push or pop elements from the desired stack.
 6. The popped elements are printed as output.
-
 In simpler terms, the TwoStack class is like a manager that takes instructions from the user and performs actions on two separate stacks accordingly. It keeps track of the inputs, communicates with the twoStacks class, and displays the results.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Now, let's focus on the twoStacks class:

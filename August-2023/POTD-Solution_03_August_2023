@@ -1,0 +1,97 @@
+//{ Driver Code Starts
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Main {
+	public static void main(String[] args) throws IOException {
+		Scanner sc = new Scanner(System.in);
+		int T = sc.nextInt();
+		while (T-- > 0) {
+			int n = sc.nextInt();
+			int m = sc.nextInt();
+			int[][] edge = new int[m][3];
+			for (int i = 0; i < m; i++) {
+				edge[i][0] = sc.nextInt();
+				edge[i][1] = sc.nextInt();
+				edge[i][2] = sc.nextInt();
+			}
+			Solution obj = new Solution();
+			int res[] = obj.shortestPath(n, m,edge);
+			for (int i = 0; i < n; i++) {
+				System.out.print(res[i] + " ");
+			}
+			System.out.println();
+		}
+	}
+}
+// } Driver Code Ends
+
+
+//User function Template for Java
+class Solution {
+
+    static class Edge {
+        int to;
+        int weight;
+
+        public Edge(int to, int weight) {
+            this.to = to;
+            this.weight = weight;
+        }
+    }
+
+    public int[] shortestPath(int N, int M, int[][] edges) {
+        List<Edge>[] graph = new ArrayList[N];
+        for (int i = 0; i < N; i++) {
+            graph[i] = new ArrayList<>();
+        }
+
+        for (int[] edge : edges) {
+            int from = edge[0];
+            int to = edge[1];
+            int weight = edge[2];
+            graph[from].add(new Edge(to, weight));
+        }
+
+        int[] indegree = new int[N];
+        for (int[] edge : edges) {
+            indegree[edge[1]]++;
+        }
+
+        Queue<Integer> queue = new LinkedList<>();
+        for (int i = 0; i < N; i++) {
+            if (indegree[i] == 0) {
+                queue.add(i);
+            }
+        }
+
+        int[] distance = new int[N];
+        Arrays.fill(distance, Integer.MAX_VALUE);
+        distance[0] = 0;
+
+        while (!queue.isEmpty()) {
+            int from = queue.poll();
+            for (Edge edge : graph[from]) {
+                int to = edge.to;
+                int weight = edge.weight;
+                if (distance[from] != Integer.MAX_VALUE && distance[from] + weight < distance[to]) {
+                    distance[to] = distance[from] + weight;
+                }
+                indegree[to]--;
+                if (indegree[to] == 0) {
+                    queue.add(to);
+                }
+            }
+        }
+
+        // If any vertex is still unreachable, set its distance to -1
+        for (int i = 0; i < N; i++) {
+            if (distance[i] == Integer.MAX_VALUE) {
+                distance[i] = -1;
+            }
+        }
+
+        return distance;
+    }
+}

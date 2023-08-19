@@ -1,0 +1,64 @@
+//{ Driver Code Starts
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Main{
+	static BufferedReader br;
+    static PrintWriter ot;
+    public static void main(String[] args) throws IOException{
+        
+        br = new BufferedReader(new InputStreamReader(System.in));
+        ot = new PrintWriter(System.out);
+
+        int t = Integer.parseInt(br.readLine());
+
+        while(t-->0){
+            
+            String s[] = br.readLine().trim().split(" ");
+            
+            int n = Integer.parseInt(s[0]);
+            int k = Integer.parseInt(s[1]);
+            int a[] = new int[n];
+            s = br.readLine().trim().split(" ");
+            for(int i = 0; i < n; i++)
+                a[i] = Integer.parseInt(s[i]);
+            Solution obj = new Solution();
+            ArrayList<Integer> res = obj.subarraySum(a, n, k);
+            for(int ii = 0;ii<res.size();ii++)
+                ot.print(res.get(ii) + " ");
+            ot.println();
+        }
+        ot.close();
+    }
+
+}
+// } Driver Code Ends
+
+class Solution {
+    public ArrayList<Integer> subarraySum(int[] arr, int n, long s) {
+        int l = 0, r = 0;
+        long sum = 0;
+        ArrayList<Integer> result = new ArrayList<>();
+        
+        while (r < n) {
+            sum += arr[r];
+            
+            while (sum > s && l < r) {
+                sum -= arr[l];
+                l++;
+            }
+            
+            if (sum == s) {
+                result.add(l + 1); // Adjust for 1-based indexing
+                result.add(r + 1); // Adjust for 1-based indexing
+                return result;
+            }
+            
+            r++;
+        }
+        
+        result.add(-1);
+        return result;
+    }
+}

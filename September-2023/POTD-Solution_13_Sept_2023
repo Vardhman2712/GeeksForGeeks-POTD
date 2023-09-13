@@ -1,0 +1,25 @@
+class Solution{
+    static String findLargest(int N, int S) {
+        if (S == 0) {
+            return (N == 1) ? "0" : "-1"; // Edge case: N digits, sum=0; only 0 is possible for N=1.
+        }
+
+        if (S > 9 * N) {
+            return "-1"; // Not possible to achieve the sum with N digits.
+        }
+
+        StringBuilder largestNumber = new StringBuilder();
+
+        for (int i = 0; i < N; i++) {
+            for (int digit = 9; digit >= 0; digit--) {
+                if (digit <= S) {
+                    largestNumber.append(digit);
+                    S -= digit;
+                    break;
+                }
+            }
+        }
+
+        return largestNumber.toString();
+    }
+}

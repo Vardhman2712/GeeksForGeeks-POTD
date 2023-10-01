@@ -1,0 +1,32 @@
+class Solution {
+    static ArrayList<Integer> boundaryTraversal(int matrix[][], int n, int m) {
+        ArrayList<Integer> result = new ArrayList<Integer>();
+
+        // Top Row:
+        for (int i = 0; i < m; i++) {
+            result.add(matrix[0][i]);
+        }
+
+        // Right Column:
+        for (int i = 1; i < n; i++) {
+            result.add(matrix[i][m - 1]);
+        }
+
+        // Bottom Row:
+        if (n > 1) { // Avoid duplicate elements for a single-row matrix
+            for (int i = m - 2; i >= 0; i--) {
+                result.add(matrix[n - 1][i]);
+            }
+        }
+
+        // Left Column:
+        if (m > 1) { // Avoid duplicate elements for a single-column matrix
+            for (int i = n - 2; i > 0; i--) {
+                result.add(matrix[i][0]);
+            }
+        }
+
+        // Result:
+        return result;
+    }
+}

@@ -1,0 +1,16 @@
+class Solution
+{
+    String colName (long n)
+    {
+        StringBuilder result = new StringBuilder();
+        
+        while (n > 0) {
+            n--;  // Adjust n to start from 0
+            char ch = (char) ('A' + (n % 26)); // Convert remainder to corresponding character
+            result.insert(0, ch); // Prepend character to the result
+            n /= 26; // Divide n by 26 for the next iteration
+        }
+        
+        return result.toString();
+    }
+}

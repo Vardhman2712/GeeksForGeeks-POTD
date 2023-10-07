@@ -1,0 +1,33 @@
+class Solution {
+
+    // Function to swap nodes pairwise in a linked list
+    public Node pairwiseSwap(Node head) {
+        // If the list is empty or has only one node, no swapping is needed
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        // Initialize pointers for swapping
+        Node prev = null;
+        Node current = head;
+
+        // Traverse the list and swap nodes pairwise
+        while (current != null && current.next != null) {
+            Node nextNode = current.next;
+            current.next = nextNode.next;
+            nextNode.next = current;
+
+            // Adjust pointers for the previous pair
+            if (prev == null) {
+                head = nextNode; // Update head if swapping the first pair
+            } else {
+                prev.next = nextNode;
+            }
+
+            prev = current;
+            current = current.next;
+        }
+
+        return head;
+    }
+}

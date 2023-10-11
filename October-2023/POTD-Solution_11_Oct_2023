@@ -1,0 +1,31 @@
+class Tree {
+    // Function to check whether a binary tree is balanced or not.
+    boolean isBalanced(Node root) {
+        // Base case: An empty tree is considered balanced.
+        if (root == null) {
+            return true;
+        }
+
+        // Calculate the height of the left and right subtrees.
+        int leftHeight = height(root.left);
+        int rightHeight = height(root.right);
+
+        // Check if the left and right subtrees are balanced, and their heights are within 1.
+        return Math.abs(leftHeight - rightHeight) <= 1 && isBalanced(root.left) && isBalanced(root.right);
+    }
+
+    // Helper function to calculate the height of a binary tree.
+    int height(Node node) {
+        // Base case: Return 0 for an empty subtree.
+        if (node == null) {
+            return 0;
+        }
+
+        // Recursively calculate the height of the left and right subtrees.
+        int leftHeight = height(node.left);
+        int rightHeight = height(node.right);
+
+        // Return the maximum height of the left and right subtrees plus 1 (for the current node).
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+}

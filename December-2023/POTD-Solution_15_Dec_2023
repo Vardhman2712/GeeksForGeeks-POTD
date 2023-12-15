@@ -1,0 +1,17 @@
+class Solution
+{
+    public int nthPoint(int n) {
+        long a, b;
+        a = b = 1;
+
+        final long mod = 1000000007L;
+
+        for (int i = 1; i < n; i++) {
+            long c = (a + b) % mod;
+            a = b;
+            b = c;
+        }
+
+        return (int) b;
+    }
+}
